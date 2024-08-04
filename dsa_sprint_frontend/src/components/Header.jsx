@@ -1,5 +1,9 @@
 const Header = () => {
-  return <header>Header</header>;
+  return (
+    <header>
+      <h1>Binary Search Tree</h1>
+    </header>
+  );
 };
 
 export default Header;
