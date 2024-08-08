@@ -1,9 +1,5 @@
 const Button = ({ text, onClick }) => {
-  return (
-    <button onClick={onClick} className="btn">
-      {text}
-    </button>
-  );
+  return <button onClick={onClick}>{text}</button>;
 };
 
 export default Button;

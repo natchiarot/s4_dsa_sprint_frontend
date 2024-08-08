@@ -6,29 +6,29 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const AddTrees = ({ onAdd }) => {
-  const [text, setText] = useState({ root: "", numberInput: "" });
+  const [text, setText] = useState({ numberInput: "" });
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (isNaN(text.root) || text.root.trim() === "") {
-      setErrorMessage("Root must be a valid number.");
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 3000);
-      return;
-    }
+    // if (isNaN(text.root) || text.root.trim() === "") {
+    //   setErrorMessage("Root must be a valid number.");
+    //   setTimeout(() => {
+    //     setErrorMessage("");
+    //   }, 3000);
+    //   return;
+    // }
 
-    if (!text.root || !text.numberInput) {
+    if (!text.numberInput) {
       alert("Please add a tree");
       return;
     }
 
-    onAdd({ root: text.root, numberInput: text.numberInput });
+    onAdd({ numberInput: text.numberInput });
 
-    setText({ root: "", numberInput: "" });
+    setText({ numberInput: "" });
 
     setSuccessMessage("Tree added successfully!");
 
@@ -47,21 +47,22 @@ const AddTrees = ({ onAdd }) => {
 
   return (
     <div>
-      <form className="add-comment" onSubmit={onSubmit}>
-        <label>Tree</label>
+      <form onSubmit={onSubmit}>
+        {/* <label>Tree</label>
         <input
           type="text"
           name="root"
           placeholder="Add root here"
           value={text.root}
           onChange={handleChange}
-        ></input>
+        ></input> */}
         <input
           type="text"
           name="numberInput"
-          placeholder="Add numbers here"
+          placeholder="Add root then numbers here"
           value={text.numberInput}
           onChange={handleChange}
+          style={{ width: "210px" }}
         ></input>
         <input type="submit" value="Upload Tree"></input>
       </form>

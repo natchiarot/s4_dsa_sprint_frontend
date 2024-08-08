@@ -2,11 +2,13 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Trees from "./components/Trees";
+import LastTree from "./components/LastTree";
 import AddTrees from "./components/AddTrees";
 import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   const [trees, setTrees] = useState([]);
+  const [showLastTree, setShowLastTree] = useState(false);
   const [showAddTree, setShowAddTree] = useState(false);
   const [showTrees, setShowTrees] = useState(false);
 
@@ -21,12 +23,6 @@ function App() {
 
   const fetchTrees = async () => {
     const res = await fetch("http://localhost:8080/numbers");
-    const data = await res.json();
-    return data;
-  };
-
-  const fetchTree = async (id) => {
-    const res = await fetch("http://localhost:8080/number/${id}");
     const data = await res.json();
     return data;
   };
@@ -52,12 +48,29 @@ function App() {
         <div className={showAddTree ? "" : "hidden"}>
           <AddTrees onAdd={addTree} />
         </div>
-
-        <button onClick={() => setShowTrees(!showTrees)}>
-          {showTrees ? "Hide Trees" : "Show All Trees"}
-        </button>
-        <div className={showTrees ? "" : "hidden"}>
-          {trees.length > 0 ? <Trees trees={trees} /> : "No trees yet"}
+        <br />
+        <div>
+          <button onClick={() => setShowLastTree(!showLastTree)}>
+            {showLastTree ? "Hide Last Tree" : "Show Last Tree"}
+          </button>
+          {showLastTree && (
+            <div>
+              {trees.length > 0 ? (
+                <LastTree lastTree={trees} />
+              ) : (
+                "No trees yet"
+              )}
+            </div>
+          )}
+        </div>
+        <br />
+        <div>
+          <button onClick={() => setShowTrees(!showTrees)}>
+            {showTrees ? "Hide Trees" : "Show All Trees"}
+          </button>
+          <div className={showTrees ? "" : "hidden"}>
+            {trees.length > 0 ? <Trees trees={trees} /> : "No trees yet"}
+          </div>
         </div>
       </div>
     </Router>

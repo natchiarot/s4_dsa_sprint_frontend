@@ -8,7 +8,7 @@ const Header = ({ onAdd, showAdd }) => {
 
   return (
     <header>
-      <h1>
+      <h1 style={{ padding: "20px" }}>
         <FontAwesomeIcon icon={faTree} /> Binary Search Tree
       </h1>
       {location.pathname === "/" && (
