@@ -13,14 +13,6 @@ const AddTrees = ({ onAdd }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    // if (isNaN(text.root) || text.root.trim() === "") {
-    //   setErrorMessage("Root must be a valid number.");
-    //   setTimeout(() => {
-    //     setErrorMessage("");
-    //   }, 3000);
-    //   return;
-    // }
-
     if (!text.numberInput) {
       alert("Please add a tree");
       return;
@@ -39,23 +31,25 @@ const AddTrees = ({ onAdd }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setText((prevText) => ({
-      ...prevText,
-      [name]: value,
-    }));
+
+    const regex = /^[0-9\s]*$/;
+
+    if (regex.test(value)) {
+      setText((prevText) => ({
+        ...prevText,
+        [name]: value,
+      }));
+    } else {
+      setErrorMessage("Only numbers and spaces are allowed.");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+    }
   };
 
   return (
     <div>
       <form onSubmit={onSubmit}>
-        {/* <label>Tree</label>
-        <input
-          type="text"
-          name="root"
-          placeholder="Add root here"
-          value={text.root}
-          onChange={handleChange}
-        ></input> */}
         <input
           type="text"
           name="numberInput"
